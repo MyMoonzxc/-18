@@ -1,0 +1,40 @@
+#include <stdio.h>
+#include <time.h>
+
+int main() {
+    // Шаг 1: Объявление переменных
+    struct tm* mytime;  // Указатель на структуру с временем
+    time_t t;           // Переменная для хранения времени
+
+    // Шаг 2: Получаем текущее системное время
+    t = time(NULL);
+
+    // Шаг 3: Преобразуем в удобный формат
+    mytime = localtime(&t);
+
+    // Шаг 4: Выводим время на экран
+    printf("TEKUSHEE VREMJA:\n");
+    printf("================\n\n");
+
+    // Часы, минуты, секунды
+    printf("Vremja: %02d:%02d:%02d\n",
+        mytime->tm_hour,   
+        mytime->tm_min,    
+        mytime->tm_sec);   
+
+    // Дата
+    printf("Data: %02d.%02d.%d\n",
+        mytime->tm_mday,   
+        mytime->tm_mon + 1, 
+        mytime->tm_year + 1900); 
+
+    // День недели
+    char* dni_nedeli[] = { "Voskresenie", "Ponedelnik", "Vtornik",
+                         "Sreda", "Chetverg", "Pjatnica", "Subbota" };
+    printf("Den nedeli: %s\n", dni_nedeli[mytime->tm_wday]);
+
+    printf("\n================\n");
+    printf("Programma zavershena!\n");
+
+    return 0;
+}
