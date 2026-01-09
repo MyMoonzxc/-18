@@ -1,0 +1,91 @@
+#include <stdio.h>
+#include<locale.h>
+
+
+struct Tochka {
+    char imja;     
+    float x;       
+    float y;       
+};
+
+// Функция для показа точки на экране
+void pokaji_tochku(struct Tochka t) {
+    printf("Точка %c: (%.1f, %.1f)\n", t.imja, t.x, t.y);
+}
+
+// Функция для вычисления расстояния между двумя точками
+float rasstojanie(struct Tochka t1, struct Tochka t2) {
+    float raznica_x = t1.x - t2.x;  
+    float raznica_y = t1.y - t2.y;  
+
+    
+    return (raznica_x * raznica_x) + (raznica_y * raznica_y);
+}
+
+// Функция для нахождения середины между двумя точками
+struct Tochka seredina(struct Tochka t1, struct Tochka t2) {
+    struct Tochka result;  // Создаем новую точку-результат
+
+    result.imja = 'S';  
+
+    // Координата X середины = (X1 + X2) / 2
+    result.x = (t1.x + t2.x) / 2.0;
+
+    // Координата Y середины = (Y1 + Y2) / 2
+    result.y = (t1.y + t2.y) / 2.0;
+
+    return result;  
+}
+
+int main() {
+    setlocale(LC_ALL, "RUS");
+    struct Tochka tochka_A, tochka_B, tochka_S;
+
+    printf("Программа 'точки на плоскости'\n");
+    printf("===============================\n\n");
+
+    // --- ВВОД ПЕРВОЙ ТОЧКИ ---
+    printf("Введите превую точку:\n");
+
+    tochka_A.imja = 'A';  // Называем точку 'A'
+
+    printf("Координата X для точки A: ");
+    scanf("%f", &tochka_A.x);  // Читаем координату X
+
+    printf("Координата Y для точки A: ");
+    scanf("%f", &tochka_A.y);  // Читаем координату Y
+
+    // --- ВВОД ВТОРОЙ ТОЧКИ ---
+    printf("\nВведите вторую точку:\n");
+
+    tochka_B.imja = 'B'; 
+
+    printf("Координата X для точки B: ");
+    scanf("%f", &tochka_B.x);  // Читаем координату X
+
+    printf("Координата Y для точки B: ");
+    scanf("%f", &tochka_B.y);  // Читаем координату Y
+
+    printf("\n===============================\n");
+    printf("Ваши точки:\n");
+
+    // ПОКАЗЫВАЕМ ТОЧКИ
+    pokaji_tochku(tochka_A);
+    pokaji_tochku(tochka_B);
+
+    // ВЫЧИСЛЯЕМ РАССТОЯНИЕ
+    printf("\nРасстояние между точками:\n");
+    float r = rasstojanie(tochka_A, tochka_B);
+    printf("Квадрат расстояния: %.2f\n", r);
+    printf("(Это квадрат расстояния без корня)\n");
+
+    // НАХОДИМ СЕРЕДИНУ
+    printf("\nСередина отрезка AB:\n");
+    tochka_S = seredina(tochka_A, tochka_B);
+    pokaji_tochku(tochka_S);
+
+    printf("\n===============================\n");
+    printf("Конец\n");
+
+    return 0;
+}
